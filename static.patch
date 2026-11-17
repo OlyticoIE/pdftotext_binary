@@ -1,0 +1,13 @@
+diff --git i/utils/CMakeLists.txt w/utils/CMakeLists.txt
+index c60a01600..1de1add1a 100644
+--- i/utils/CMakeLists.txt
++++ w/utils/CMakeLists.txt
+@@ -140,7 +140,7 @@ set(pdftotext_SOURCES
+   pdftotext.cc printencodings.cc
+ )
+ add_executable(pdftotext ${pdftotext_SOURCES})
+-target_link_libraries(pdftotext ${common_libs})
++target_link_libraries(pdftotext ${common_libs} -static)
+ install(TARGETS pdftotext DESTINATION bin)
+ install(FILES pdftotext.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
+

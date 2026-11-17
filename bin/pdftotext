@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+require 'rbconfig'
+require 'zlib'
+
+binary = ENV['PDFTOTEXT_BIN']
+if binary.nil? || binary == ''
+  if RbConfig::CONFIG['host_cpu'] != 'x86_64' || RbConfig::CONFIG['host_os'] !~ /linux/
+    raise "pdftotext_binary: unsupported platform #{RbConfig::CONFIG['host_os']}/#{RbConfig::CONFIG['host_cpu']}"
+  end
+
+  binary = "#{__FILE__}_bin"
+  unless File.exist?(binary)
+    File.open(binary, 'wb', 0o755) { |fp| Zlib::GzipReader.open("#{binary}.gz") { |gz| fp << gz.read } }
+  end
+end
+exec *$*.unshift(binary)

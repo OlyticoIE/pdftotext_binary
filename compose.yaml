@@ -1,0 +1,6 @@
+services:
+  debian:
+    volumes: ['.:/root/pdftotext_binary']
+    build:
+      context:    '.'
+      dockerfile: 'Dockerfile_debian'
