@@ -5,7 +5,7 @@ Note that poppler is GPL 2 or later.
 
 Run `make.zsh` to build a new binary.
 
-[popler]: https://poppler.freedesktop.org/
+[poppler]: https://poppler.freedesktop.org/
 
 Usage
 -----
