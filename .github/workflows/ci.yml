@@ -1,0 +1,42 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test-ubuntu:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['3.2', '4.0']
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Ruby ${{ matrix.ruby-version }} on ubuntu
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Run tests
+        run: ./bin/pdftotext -v
+
+  tests-on-x86-docker:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['3.2', '4.0']
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Ruby ${{ matrix.ruby-version }} on ubuntu
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Run tests on docker(x86)
+        run: bundle exec rake
